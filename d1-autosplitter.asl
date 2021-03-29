@@ -7,9 +7,8 @@ state("Dishonored", "1.2")
 {
 	float x : 0xFCCBDC, 0xC4;
 	int levelNumber : 0xFB7838, 0x2C0, 0x314, 0x0, 0x38;
-	string32 movie : 0xCB30400, 0x10;
+	string64 movie : 0xFC6AD4, 0x48, 0x0;
 	bool cutsceneActive : 0xFB51CC, 0x744;
-	//int missionsStatsScreenFlags : 0xFDEB08, 0x24, 0x41C, 0x2E0, 0xC4;
 	bool isLoading : "binkw32.dll", 0x312F4;
 }
 
@@ -25,47 +24,47 @@ state("Dishonored", "1.4 Steam")
 
 startup {
 	vars.autoSplits = new Tuple<string, string, bool>[] {
-		Tuple.Create("Coldridge Prison", "L_Prison_P", true),
-		Tuple.Create("Dunwall Sewers", "L_PrsnSewer_P", true),
-		Tuple.Create("Meeting Piero", "L_Pub_Day_P", true),
-		Tuple.Create("Somehwere Else...", "L_OutsiderDream_P", true),
-		Tuple.Create("Brief - High Overseer Campbell", "L_Pub_Dusk_P", true),
-		Tuple.Create("To Holger Square", "L_Streets1_P", true),
-		Tuple.Create("High Overseer's Office", "L_Ovrsr_P", true),
-		Tuple.Create("The Backyard", "L_Ovrsr_Back_P", true),
-		Tuple.Create("Debrief - High Overseer Campbell", "L_Pub_Morning_P", true),
-		Tuple.Create("Brief - The Golden Cat", "L_Pub_Day_P", true),
-		Tuple.Create("To The Golden Cat", "L_Streets2_P", true),
-		Tuple.Create("The House of Pleasure", "L_Brothel_P", true),
-		Tuple.Create("Under the Bridge", "L_Streets2_P", true),
-		Tuple.Create("Debrief & Brief", "L_Pub_Dusk_P", true),
-		Tuple.Create("Southside Gate", "L_Bridge_Part1a_P", true),
-		Tuple.Create("Drawbridge Way", "L_Bridge_Part1b_P", true),
-		Tuple.Create("Midrow Substation", "L_Bridge_Part1c_P", true),
-		Tuple.Create("North End", "L_Bridge_Part2_P", true),
-		Tuple.Create("Debrief - The Royal Physician", "L_Pub_Night_P", true),
-		Tuple.Create("Brief - Lady Boyle's Last Party", "L_Pub_Day_P", true),
-		Tuple.Create("Into the Party", "L_Boyle_Ext_P", true),
-		Tuple.Create("Boyle Manor", "L_Boyle_Int_P", true),
-		Tuple.Create("Escape the Party", "L_Boyle_Ext_P", true),
-		Tuple.Create("Debrief & Brief", "L_Pub_Morning_P", true),
-		Tuple.Create("Get to the Tower", "L_TowerRtrn_Yard_P", true),
-		Tuple.Create("Alert the Guards", "L_TowerRtrn_Int_P", true),
-		Tuple.Create("Kill the Regent", "L_TowerRtrn_Yard_P", true),
-		Tuple.Create("Debrief - Return to the Tower", "L_Pub_Dusk_P", true),
-		Tuple.Create("Meeting Daud", "L_Flooded_FIntro_P", true),
-		Tuple.Create("Rudshore Waterfront", "L_Flooded_FStreets_P", true),
-		Tuple.Create("Central Rudshore", "L_Flooded_FAssassins_P", true),
-		Tuple.Create("Rudshore Gate", "L_Flooded_FGate_P", true),
-		Tuple.Create("Old Port District", "L_Streetsewer_P", true),
+		Tuple.Create("Prison Start", "L_Prison_P", true),
+		Tuple.Create("Sewers Start", "L_PrsnSewer_P", true),
+		Tuple.Create("Outsider Start/S1", "L_Pub_Day_P", true),
+		Tuple.Create("Outsider S2", "L_OutsiderDream_P", false),
+		Tuple.Create("Outsider S3", "L_Pub_Dusk_P", false),
+		Tuple.Create("Campbell Start/S1", "L_Streets1_P", true),
+		Tuple.Create("Campbell S2", "L_Ovrsr_P", false),
+		Tuple.Create("Campbell S3", "L_Ovrsr_Back_P", false),
+		Tuple.Create("Weepers Start/S1", "L_Pub_Morning_P", true),
+		Tuple.Create("Weepers S2", "L_Pub_Day_P", false),
+		Tuple.Create("Golden Cat Start/S1", "L_Streets2_P", true),
+		Tuple.Create("Golden Cat S2", "L_Brothel_P", false),
+		Tuple.Create("Golden Cat S3", "L_Streets2_P", false),
+		Tuple.Create("Bridge Start/I1", "L_Pub_Dusk_P", true),
+		Tuple.Create("Bridge S1", "L_Bridge_Part1a_P", false),
+		Tuple.Create("Bridge S2", "L_Bridge_Part1b_P", false),
+		Tuple.Create("Bridge S3", "L_Bridge_Part1c_P", false),
+		Tuple.Create("Bridge S4", "L_Bridge_Part2_P", false),
+		Tuple.Create("Boyle Start/I1", "L_Pub_Night_P", true),
+		Tuple.Create("Boyle I2", "L_Pub_Day_P", false),
+		Tuple.Create("Boyle S1", "L_Boyle_Ext_P", false),
+		Tuple.Create("Boyle S2", "L_Boyle_Int_P", false),
+		Tuple.Create("Boyle S3", "L_Boyle_Ext_P", false),
+		Tuple.Create("Tower Start/I1", "L_Pub_Morning_P", true),
+		Tuple.Create("Tower S1", "L_TowerRtrn_Yard_P", false),
+		Tuple.Create("Tower S2", "L_TowerRtrn_Int_P", false),
+		Tuple.Create("Tower S3", "L_TowerRtrn_Yard_P", false),
+		Tuple.Create("Flooded Start/I1", "L_Pub_Dusk_P", true),
+		Tuple.Create("Flooded I2", "L_Flooded_FIntro_P", false),
+		Tuple.Create("Flooded S1", "L_Flooded_FStreets_P", false),
+		Tuple.Create("Flooded S2", "L_Flooded_FAssassins_P", false),
+		Tuple.Create("Flooded S3", "L_Flooded_FGate_P", false),
+		Tuple.Create("Flooded S4", "L_Streetsewer_P", false),
 		Tuple.Create("Loyalists", "L_Pub_Assault_P", true),
-		Tuple.Create("Kingsparrow Fort", "L_Isl_LowChaos_P", true),
-		Tuple.Create("The Lighthouse", "L_LightH_LowChaos_P", true),
+		Tuple.Create("Kingsparrow S1", "L_Isl_LowChaos_P", true),
+		Tuple.Create("Kingsparrow S2", "L_LightH_LowChaos_P", false),
 	};
 
 	int i = 0;
 	foreach  (var autoSplit in vars.autoSplits) {
-		settings.Add("autosplit_" + i.ToString(), autoSplit.Item3, "Split on \"" + autoSplit.Item1 + "\" start");
+		settings.Add("autosplit_" + i.ToString(), autoSplit.Item3, "Split on " + autoSplit.Item1);
 		++i;
 	}
 	settings.Add("autosplit_end", true, "Split on End");
@@ -90,7 +89,7 @@ exit {
 }
 
 isLoading {
-	return current.isLoading;
+	return current.isLoading && current.movie != "Dishonored";
 }
 
 update {
@@ -98,7 +97,6 @@ update {
 	if (old.isLoading || current.isLoading) {
 		int levelNum = current.levelNumber * 4;
 		string levelName = new DeepPointer(0xFA3624, levelNum, 0x10).DerefString(game, 32);
-		print("LiveSplit level update: " + levelName);
 		vars.runStarting = levelName.StartsWith("l_tower_p")
 			&& posX - delta < current.x
 			&& posX + delta > current.x;
@@ -136,8 +134,10 @@ split {
 			return true;
 		}
 	} else if (vars.autoSplitIndex == vars.autoSplits.Length && settings["autosplit_end"]) {
-		// TBD
-		return true;
+		if (!current.isLoading && current.cutsceneActive) {
+			++vars.autoSplitIndex;
+			return true;
+		}
 	}
 
 	return false;
