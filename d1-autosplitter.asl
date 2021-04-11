@@ -104,6 +104,7 @@ isLoading {
 update {
 	const double posX = 9826.25f, delta = 0.25f;
 	if (old.isLoading || current.isLoading) {
+		// if we are loading, check for run reset
 		int levelNum = current.levelNumber * 4;
 		string levelName = new DeepPointer(0xFA3624, levelNum, 0x10).DerefString(game, 32);
 		vars.runStarting = levelName.StartsWith("l_tower_p")
@@ -132,6 +133,7 @@ start {
 
 split {
 	if (vars.autoSplitIndex < vars.autoSplits.Length) {
+		// if we are in a loading screen, split if applicable based on level
 		int levelNum = current.levelNumber * 4;
 		string levelName = new DeepPointer(0xFA3624, levelNum, 0x10).DerefString(game, 32);
 		if (current.isLoading && levelName.StartsWith(vars.autoSplits[vars.autoSplitIndex].Item2)) {
@@ -143,6 +145,7 @@ split {
 			return true;
 		} else if (old.missionStatsScreenFlags != current.missionStatsScreenFlags &&
 		           (current.missionStatsScreenFlags & 1) != 0) {
+			// if we are on a mission stat screen, split if applicable
 			if (!current.isLoading && vars.autoSplits[vars.autoSplitIndex].Item2.StartsWith("mission_stats")) {
 				for (++vars.autoSplitIndex; vars.autoSplitIndex < vars.autoSplits.Length; ++vars.autoSplitIndex) {
 					if (settings["autosplit_" + vars.autoSplitIndex.ToString()]) {
@@ -153,6 +156,7 @@ split {
 			}
 		}
 	} else if (vars.autoSplitIndex == vars.autoSplits.Length && settings["autosplit_end"]) {
+		// if the last remaining split is the end, and we have started the cutscene, split if applicable
 		if (!current.isLoading && current.cutsceneActive) {
 			++vars.autoSplitIndex;
 			return true;
