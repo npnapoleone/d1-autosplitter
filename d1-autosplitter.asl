@@ -11,16 +11,28 @@ state("Dishonored", "1.2")
 	bool cutsceneActive : 0xFB51CC, 0x744;
 	bool isLoading : "binkw32.dll", 0x312F4;
 	int missionStatsScreenFlags : 0xFDEB08, 0x24, 0x41C, 0x2E0, 0xC4;
+	//int stringTableBase : 0xFA3624;
 }
 
-state("Dishonored", "1.4 Reloaded")
+state("Dishonored", "1.4")
 {
-	
+	float x : 0x1052DE8, 0xC4;
+	int levelNumber : 0x103D878, 0x2C0, 0x314, 0x0, 0x38;
+	string64 movie : 0x104CB18, 0x48, 0x0;
+	bool cutsceneActive : 0x103B20C, 0x744;
+	bool isLoading : "binkw32.dll", 0x312F4;
+	int missionStatesScreenFlags : 0x1065184, 0x24, 0x41C, 0x2F4, 0xC4;
+	//int stringTableBase : 0x1029664;
 }
 
-state("Dishonored", "1.4 Steam")
+state("Dishonored", "GAMEPASS")
 {
-	
+	//float x : 0x___, 0xC4;
+	//int levelNumber : 0x___, 0x2C0, 0x314, 0x0, 0x38;
+	//string64 movie : 0x___, 0x48, 0x0;
+	//bool cutsceneActive : 0x___, 0x744;
+	//bool isLoading : "binkw32.dll", 0x312F4;
+	//int missionStatesScreenFlags : 0x___, 0x24, 0x41C, 0x2F4, 0xC4;
 }
 
 startup {
@@ -82,7 +94,21 @@ startup {
 }
 
 init {
-	version = "1.2";
+	switch (modules.First().ModuleMemorySize) {
+		case 18219008:
+			version = "1.2";
+			break;
+		case 18862080:
+		case 19427328:
+			version = "1.4";
+			break;
+		case 27680768:
+			version = "GAMEPASS";
+			break;
+		default:
+			version = "";
+			break;
+	}
 
 	if (vars.autoSplitIndex == -1) {
 		for (vars.autoSplitIndex = 0; vars.autoSplitIndex < vars.autoSplits.Length; ++vars.autoSplitIndex) {
@@ -106,7 +132,7 @@ update {
 	if (old.isLoading || current.isLoading) {
 		// if we are loading, check for run reset
 		int levelNum = current.levelNumber * 4;
-		string levelName = new DeepPointer(0xFA3624, levelNum, 0x10).DerefString(game, 32);
+		string levelName = new DeepPointer(0x1029664, levelNum, 0x10).DerefString(game, 32);
 		vars.runStarting = levelName.StartsWith("l_tower_p")
 			&& posX - delta < current.x
 			&& posX + delta > current.x;
@@ -135,7 +161,7 @@ split {
 	if (vars.autoSplitIndex < vars.autoSplits.Length) {
 		// if we are in a loading screen, split if applicable based on level
 		int levelNum = current.levelNumber * 4;
-		string levelName = new DeepPointer(0xFA3624, levelNum, 0x10).DerefString(game, 32);
+		string levelName = new DeepPointer(0x1029664, levelNum, 0x10).DerefString(game, 32);
 		if (current.isLoading && levelName.StartsWith(vars.autoSplits[vars.autoSplitIndex].Item2)) {
 			for (++vars.autoSplitIndex; vars.autoSplitIndex < vars.autoSplits.Length; ++vars.autoSplitIndex) {
 				if (settings["autosplit_" + vars.autoSplitIndex.ToString()]) {
